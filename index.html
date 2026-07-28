@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Tracker — Smart Expense Tracker System</title>
+<meta name="description" content="Nova Tracker is a cross-platform expense management app built with Flutter and Firebase. Track spending, set budgets, and get smart alerts.">
+
+<!-- Google Fonts: Orbitron (HUD display) + Rajdhani (technical body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- scanline / grid overlay -->
+<div class="hud-overlay" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="top">
+  <div class="nav__inner">
+    <a href="#top" class="nav__brand">
+      <span class="nav__dot"></span> NOVA<span class="accent">TRACKER</span>
+    </a>
+    <nav class="nav__links">
+      <a href="#screens">Screens</a>
+      <a href="#features">Features</a>
+      <a href="#tech">Tech Stack</a>
+      <a href="#download" class="nav__cta">Download</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow">// SYSTEM ACTIVE</p>
+      <h1 class="hero__title">Every expense.<br>Every goal.<br><span class="accent">Under control.</span></h1>
+      <p class="hero__sub">
+        Nova Tracker is a precision-engineered expense tracker for Android — built on Flutter
+        and Firebase — that logs spending, watches your budget, and warns you before you
+        blow it.
+      </p>
+      <div class="hero__actions">
+        <a href="#download" class="btn btn--primary">
+          <svg viewBox="0 0 24 24" class="btn__icon"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download APK
+        </a>
+        <a href="#feedback" class="btn btn--ghost">Send Feedback</a>
+      </div>
+      <p class="hero__meta">v1.0.0 &nbsp;·&nbsp; Android 8.0+ &nbsp;·&nbsp; ~18 MB &nbsp;·&nbsp; No ads</p>
+    </div>
+
+    <div class="hero__stage">
+      <div class="stat-card stat-card--balance">
+        <span class="stat-card__label">CURRENT BALANCE</span>
+        <span class="stat-card__value">¥1,420.50</span>
+        <span class="stat-card__bar"><i style="width:32%"></i></span>
+      </div>
+      <div class="stat-card stat-card--budget">
+        <span class="stat-card__label">MONTHLY BUDGET USED</span>
+        <span class="stat-card__value">68%</span>
+        <span class="stat-card__bar"><i style="width:68%"></i></span>
+      </div>
+      <div class="phone-frame phone-frame--hero">
+        <img src="assets/screenshots/dashboard.png" alt="Nova Tracker dashboard screen">
+        <div class="phone-frame__scan"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCREENSHOT SLIDER ============ -->
+<section class="section" id="screens">
+  <p class="eyebrow eyebrow--center">// FIELD CAPTURE</p>
+  <h2 class="section__title">See it in action</h2>
+  <p class="section__sub">Five screens from the live build — swipe through, just like a Play Store preview.</p>
+
+  <div class="carousel" id="screenCarousel">
+    <button type="button" class="carousel__arrow carousel__arrow--prev" aria-label="Previous screenshot">‹</button>
+
+    <div class="carousel__track" id="carouselTrack">
+
+      <div class="carousel__slide is-active" data-index="0">
+        <div class="phone-frame">
+          <img src="assets/screenshots/login.png" alt="Nova Tracker login screen" loading="lazy">
+        </div>
+        <p class="slide-caption">01 — Secure Sign-In</p>
+      </div>
+
+      <div class="carousel__slide" data-index="1">
+        <div class="phone-frame">
+          <img src="assets/screenshots/dashboard.png" alt="Nova Tracker dashboard screen" loading="lazy">
+        </div>
+        <p class="slide-caption">02 — Command Center</p>
+      </div>
+
+      <div class="carousel__slide" data-index="2">
+        <div class="phone-frame">
+          <img src="assets/screenshots/expenses.png" alt="Nova Tracker expense history screen" loading="lazy">
+        </div>
+        <p class="slide-caption">03 — Expense History</p>
+      </div>
+
+      <div class="carousel__slide" data-index="3">
+        <div class="phone-frame">
+          <img src="assets/screenshots/analytics.png" alt="Nova Tracker analytics screen" loading="lazy">
+        </div>
+        <p class="slide-caption">04 — Spending Analytics</p>
+      </div>
+
+      <div class="carousel__slide" data-index="4">
+        <div class="phone-frame">
+          <img src="assets/screenshots/profile.png" alt="Nova Tracker profile screen" loading="lazy">
+        </div>
+        <p class="slide-caption">05 — Profile &amp; Settings</p>
+      </div>
+
+    </div>
+
+    <button type="button" class="carousel__arrow carousel__arrow--next" aria-label="Next screenshot">›</button>
+
+    <div class="carousel__dots" id="carouselDots"></div>
+  </div>
+</section>
+
+<!-- ============ PURPOSE / BACKGROUND ============ -->
+<section class="section" id="features">
+  <div class="split">
+    <div class="panel">
+      <p class="eyebrow"><span class="icon-dot"></span> PURPOSE</p>
+      <h3 class="panel__title">What it's built to do</h3>
+      <ul class="checklist">
+        <li>Track daily expenses</li>
+        <li>Monitor monthly budgets</li>
+        <li>Visualize spending patterns</li>
+        <li>Receive automatic budget alerts</li>
+        <li>Simplify financial management</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <p class="eyebrow"><span class="icon-dot"></span> BACKGROUND</p>
+      <h3 class="panel__title">Why it exists</h3>
+      <p class="panel__text">
+        Managing daily expenses by hand is slow, and most expense apps are hard to use,
+        cluttered with ads, missing automatic logging, or weak on visualizing spending.
+      </p>
+      <p class="panel__text">
+        Nova Tracker combines Flutter, Cloud Firestore, Firebase Authentication, and Firebase
+        Cloud Messaging into one modern, intelligent tracking experience.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH STACK ============ -->
+<section class="section section--tight" id="tech">
+  <p class="eyebrow eyebrow--center">// SYSTEM DIAGRAM</p>
+  <h2 class="section__title">Technologies used</h2>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <span class="tech-card__glyph">◆</span>
+      <span class="tech-card__name">Flutter</span>
+      <span class="tech-card__desc">Cross-platform</span>
+    </div>
+    <div class="tech-card">
+      <span class="tech-card__glyph">▲</span>
+      <span class="tech-card__name">Firebase</span>
+      <span class="tech-card__desc">Backend</span>
+    </div>
+    <div class="tech-card">
+      <span class="tech-card__glyph">▤</span>
+      <span class="tech-card__name">Cloud Firestore</span>
+      <span class="tech-card__desc">Real-time database</span>
+    </div>
+    <div class="tech-card">
+      <span class="tech-card__glyph">◈</span>
+      <span class="tech-card__name">FCM</span>
+      <span class="tech-card__desc">Push notifications</span>
+    </div>
+    <div class="tech-card">
+      <span class="tech-card__glyph">⛨</span>
+      <span class="tech-card__name">Secure &amp; Reliable</span>
+      <span class="tech-card__desc">Encrypted at rest</span>
+    </div>
+  </div>
+
+  <div class="flow">
+    <span class="flow__step">Login</span>
+    <span class="flow__arrow">→</span>
+    <span class="flow__step">Dashboard</span>
+    <span class="flow__arrow">→</span>
+    <span class="flow__step">Add Expense</span>
+    <span class="flow__arrow">→</span>
+    <span class="flow__step">Saved to Firebase</span>
+    <span class="flow__arrow">→</span>
+    <span class="flow__step">View Analytics</span>
+    <span class="flow__arrow">→</span>
+    <span class="flow__step">Budget Alert</span>
+  </div>
+</section>
+
+<!-- ============ DOWNLOAD ============ -->
+<section class="section section--download" id="download">
+  <div class="download-panel">
+    <p class="eyebrow eyebrow--center">// DEPLOY TO DEVICE</p>
+    <h2 class="section__title">Get Nova Tracker</h2>
+    <p class="section__sub">
+      Sideload the APK directly — Nova Tracker isn't on the Play Store yet.
+      You'll need to allow "install from unknown sources" on your Android device.
+    </p>
+
+    <a href="apk/NovaTracker.apk" download class="btn btn--primary btn--large" id="downloadBtn">
+      <svg viewBox="0 0 24 24" class="btn__icon"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Download APK (v1.0.0)
+    </a>
+
+    <div class="specs">
+      <div class="specs__item"><span>Platform</span><strong>Android 8.0+</strong></div>
+      <div class="specs__item"><span>Size</span><strong>~18 MB</strong></div>
+      <div class="specs__item"><span>Permissions</span><strong>SMS (optional), Notifications</strong></div>
+      <div class="specs__item"><span>Currency</span><strong>Multi-currency (¥ / $ / ₹)</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEEDBACK ============ -->
+<section class="section section--feedback" id="feedback">
+  <p class="eyebrow eyebrow--center">// TRANSMIT REPORT</p>
+  <h2 class="section__title">Send feedback</h2>
+  <p class="section__sub">Found a bug? Want a feature? Tell us — every report goes into a private spreadsheet only the team can open. No one else can see what you or anyone else submits.</p>
+
+  <form id="feedbackForm" class="feedback-form">
+    <div class="field">
+      <label for="fbName">Name</label>
+      <input type="text" id="fbName" name="name" placeholder="Your name" required>
+    </div>
+    <div class="field">
+      <label for="fbEmail">Email <span class="optional">(optional)</span></label>
+      <input type="email" id="fbEmail" name="email" placeholder="you@example.com">
+    </div>
+    <div class="field">
+      <label for="fbType">Feedback type</label>
+      <select id="fbType" name="type" required>
+        <option value="Bug Report">Bug report</option>
+        <option value="Feature Request">Feature request</option>
+        <option value="General Feedback" selected>General feedback</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Rating</label>
+      <div class="rating" id="rating" data-value="0">
+        <button type="button" class="rating__star" data-star="1">★</button>
+        <button type="button" class="rating__star" data-star="2">★</button>
+        <button type="button" class="rating__star" data-star="3">★</button>
+        <button type="button" class="rating__star" data-star="4">★</button>
+        <button type="button" class="rating__star" data-star="5">★</button>
+      </div>
+    </div>
+    <div class="field field--full">
+      <label for="fbMessage">Message</label>
+      <textarea id="fbMessage" name="message" rows="4" placeholder="What's on your mind?" required></textarea>
+    </div>
+    <button type="submit" class="btn btn--primary field--full" id="fbSubmit">Submit Feedback</button>
+    <p class="feedback-status" id="feedbackStatus" role="status"></p>
+  </form>
+  <p class="feedback-note">Your feedback goes straight into a private inbox the team checks — it's
+    never shown to other visitors. (As a safety net, a copy is also echoed to this browser's own local
+    storage — see <a href="local-feedback-backup.html">local-feedback-backup.html</a> — but that's just
+    a backup of your own submission, not a public feedback wall.)</p>
+</section>
+
+<footer class="footer">
+  <p>Nova Tracker — a research project by Prasann Teradal (226KT04)</p>
+  <p class="footer__small">Built with Flutter &amp; Firebase. This site is static and hosted on GitHub Pages.</p>
+</footer>
+
+<!-- Feedback destination: your Google Sheet Web App URL -->
+<script src="js/sheet-config.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

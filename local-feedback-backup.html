@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Tracker — Local Backup (this device only)</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="hud-overlay" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__brand"><span class="nav__dot"></span> NOVA<span class="accent">TRACKER</span></a>
+    <nav class="nav__links"><a href="index.html">← Back to site</a></nav>
+  </div>
+</header>
+
+<main class="admin-wrap">
+  <p class="eyebrow">// LOCAL BACKUP — NOT THE FEEDBACK INBOX</p>
+  <div class="admin-header">
+    <h1 class="section__title" style="text-align:left;margin:0;">Submissions made from this browser</h1>
+    <div style="display:flex; gap:12px;">
+      <button type="button" id="exportBtn" class="btn btn--primary">Export as CSV</button>
+      <button type="button" id="clearBtn" class="btn btn--ghost">Clear local log</button>
+    </div>
+  </div>
+
+  <div class="admin-warning">
+    <strong>This page is not your feedback inbox.</strong> It only echoes back
+    whatever was submitted from <em>this exact browser, on this exact device</em> —
+    it exists purely as a safety net so a submission is never silently lost if
+    the network request fails. It cannot show anything another visitor
+    submitted, and no one but you should ever need to open this file.
+    <br><br>
+    <strong>Real feedback — from every visitor — lives in your private Google
+    Sheet</strong> (the one you connected in <code>js/sheet-config.js</code>).
+    Open that sheet directly in Google Sheets to read, sort, or export it.
+    Only you can see it, as long as you leave its sharing setting at the
+    default ("Restricted" / only you) rather than switching it to
+    "Anyone with the link."
+  </div>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table" id="feedbackTable" hidden>
+      <thead>
+        <tr>
+          <th>Received</th><th>Name</th><th>Email</th><th>Type</th><th>Rating</th><th>Message</th>
+        </tr>
+      </thead>
+      <tbody id="feedbackBody"></tbody>
+    </table>
+    <p class="admin-empty" id="emptyState">No feedback stored on this device yet.</p>
+  </div>
+</main>
+
+<script>
+  const KEY = 'novaTrackerFeedback';
+
+  function loadFeedback() {
+    try {
+      return JSON.parse(localStorage.getItem(KEY) || '[]');
+    } catch (err) {
+      console.error('Could not read local feedback:', err);
+      return [];
+    }
+  }
+
+  function render() {
+    const entries = loadFeedback();
+    const table = document.getElementById('feedbackTable');
+    const body = document.getElementById('feedbackBody');
+    const empty = document.getElementById('emptyState');
+
+    body.innerHTML = '';
+
+    if (!entries.length) {
+      table.hidden = true;
+      empty.hidden = false;
+      return;
+    }
+
+    table.hidden = false;
+    empty.hidden = true;
+
+    entries.slice().reverse().forEach((entry) => {
+      const tr = document.createElement('tr');
+      const cells = [
+        entry.createdAt ? new Date(entry.createdAt).toLocaleString() : '',
+        entry.name || '',
+        entry.email || '',
+        entry.type || '',
+        entry.rating ? '★'.repeat(entry.rating) : '—',
+        entry.message || '',
+      ];
+      cells.forEach((val) => {
+        const td = document.createElement('td');
+        td.textContent = val;
+        td.title = val;
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+  }
+
+  function toCsvValue(val) {
+    const str = String(val ?? '');
+    if (/[",\n]/.test(str)) {
+      return '"' + str.replace(/"/g, '""') + '"';
+    }
+    return str;
+  }
+
+  function exportCsv() {
+    const entries = loadFeedback();
+    if (!entries.length) return;
+
+    const headers = ['Received At', 'Name', 'Email', 'Type', 'Rating', 'Message', 'Page', 'User Agent'];
+    const rows = entries.map((e) => [
+      e.createdAt || '', e.name || '', e.email || '', e.type || '',
+      e.rating || '', e.message || '', e.page || '', e.userAgent || '',
+    ]);
+
+    const csv = [headers, ...rows].map((row) => row.map(toCsvValue).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `nova-tracker-feedback-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('exportBtn').addEventListener('click', exportCsv);
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    if (confirm('Clear all locally stored feedback on this device? This cannot be undone.')) {
+      localStorage.removeItem(KEY);
+      render();
+    }
+  });
+
+  render();
+</script>
+</body>
+</html>

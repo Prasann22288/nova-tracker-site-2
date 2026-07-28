@@ -1,0 +1,10 @@
+{
+  "name": "nova-tracker-site",
+  "version": "1.0.0",
+  "description": "Landing page for Nova Tracker — Smart Expense Tracker System",
+  "private": true,
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "notes": "This site is plain HTML/CSS/JS with no runtime dependencies (the screenshot carousel is hand-built, not a library) and no build step, so it can be hosted as-is on GitHub Pages. 'npm start' just serves the folder locally for testing — it is NOT required for GitHub Pages hosting."
+}

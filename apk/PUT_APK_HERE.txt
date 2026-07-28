@@ -1,0 +1,30 @@
+Put your real APK file in this folder and name it exactly:
+
+    NovaTracker.apk
+
+The Download button on the site links to: apk/NovaTracker.apk
+
+--------------------------------------------------------------------
+IMPORTANT — GitHub file size limits
+--------------------------------------------------------------------
+GitHub blocks any single file over 100 MB, and warns you above 50 MB.
+A typical Flutter release APK is well under that, so committing it
+directly to this "apk/" folder normally works fine.
+
+If your APK is large, or you'd rather not bloat your git history with
+binary files, use a GitHub Release instead:
+
+  1. On your repo page, click "Releases" -> "Create a new release".
+  2. Tag it (e.g. v1.0.0), attach NovaTracker.apk as a binary asset,
+     and publish.
+  3. Copy the direct asset URL GitHub gives you (looks like
+     https://github.com/<user>/<repo>/releases/download/v1.0.0/NovaTracker.apk).
+  4. In index.html, replace both occurrences of:
+         href="apk/NovaTracker.apk"
+     with that release URL.
+
+Either approach works with GitHub Pages, since Pages only serves the
+site itself — the APK download can point anywhere, including a
+Release asset on the same repo.
+
+Delete this text file once your real APK is in place.
