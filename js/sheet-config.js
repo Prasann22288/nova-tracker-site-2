@@ -22,4 +22,4 @@
    link," every visitor's feedback becomes publicly readable — don't.
    =================================================================== */
 
-const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzCHisZVrA0hkoZfwS7Fr98N8rjhGb1eLtavYAMhW-H1hOyFMIZ-3DbSUe49aCnnt1xWA/exec";
